@@ -1,11 +1,12 @@
 # Calculator Project
 
-A small Python module providing two arithmetic functions:
+A small Python module providing three arithmetic functions:
 
 | Function | Behavior |
 | --- | --- |
 | `add(a, b)` | Returns `a + b`. |
 | `sub(a, b)` | Returns `a - b` (the order of the operands matters). |
+| `multiply(a, b)` | Returns `a * b`. |
 
 The implementation is in `Calculator.py`. It uses Python's arithmetic
 operators directly, with no input validation or external dependencies.
@@ -17,10 +18,11 @@ Unsupported operand combinations raise Python's normal `TypeError`.
 Install Python 3 and run Python from the repository directory:
 
 ```python
-from Calculator import add, sub
+from Calculator import add, multiply, sub
 
 print(add(5, 3))  # 8
 print(sub(5, 3))  # 2
+print(multiply(5, 3))  # 15
 ```
 
 This project is an importable module, not an interactive calculator.
@@ -35,7 +37,7 @@ installed. From the repository directory, run:
 python -m unittest discover -s tests -v
 ```
 
-The suite covers addition and subtraction with positive and negative operands,
+The suite covers addition, subtraction, and multiplication with positive and negative operands,
 zero, equal operands, floating-point and mixed numeric inputs, large integers,
 and unsupported operand combinations.
 

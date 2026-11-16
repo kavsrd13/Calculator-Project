@@ -1,6 +1,6 @@
 import unittest
 
-from Calculator import add, sub
+from Calculator import add, multiply, sub
 
 
 class CalculatorTests(unittest.TestCase):
@@ -47,6 +47,40 @@ class CalculatorTests(unittest.TestCase):
         for a, b, expected in cases:
             with self.subTest(a=a, b=b):
                 self.assertAlmostEqual(sub(a, b), expected)
+
+    def test_multiply_integers(self):
+        cases = [
+            (5, 3, 15),
+            (-5, -3, 15),
+            (-5, 3, -15),
+            (5, -3, -15),
+            (0, 7, 0),
+            (7, 0, 0),
+            (0, 0, 0),
+            (7, 1, 7),
+            (1, 7, 7),
+            (10**100, 2, 2 * 10**100),
+        ]
+        for a, b, expected in cases:
+            with self.subTest(a=a, b=b):
+                self.assertEqual(multiply(a, b), expected)
+
+    def test_multiply_floating_point_and_mixed_numbers(self):
+        cases = [
+            (0.1, 0.2, 0.02),
+            (-1.5, 0.5, -0.75),
+            (2, 0.5, 1.0),
+            (0.5, 2, 1.0),
+        ]
+        for a, b, expected in cases:
+            with self.subTest(a=a, b=b):
+                self.assertAlmostEqual(multiply(a, b), expected)
+
+    def test_multiply_unsupported_operands_raise_type_error(self):
+        for a, b in [(None, 1), (1, None), ("2", 0.5), (0.5, "2")]:
+            with self.subTest(a=a, b=b):
+                with self.assertRaises(TypeError):
+                    multiply(a, b)
 
     def test_unsupported_operands_raise_type_error(self):
         for operation in (add, sub):
